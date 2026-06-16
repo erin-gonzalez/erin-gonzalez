@@ -1,0 +1,539 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Erin Gonzalez — Northwestern Mutual</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --navy:       #0C1F3D;
+    --navy-mid:   #163359;
+    --gold:       #B8972A;
+    --gold-light: #E2C96A;
+    --gold-pale:  #F5EDCC;
+    --cream:      #FAF8F4;
+    --white:      #FFFFFF;
+    --text-dark:  #0C1F3D;
+    --text-mid:   #364555;
+    --text-muted: #7A8A9A;
+    --rule:       #D5E0EC;
+  }
+
+  html { scroll-behavior: smooth; }
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: var(--cream);
+    color: var(--text-dark);
+    -webkit-font-smoothing: antialiased;
+  }
+
+  /* ── SLIDE BASE ── */
+  .slide {
+    width: 100%;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 80px 10%;
+    position: relative;
+    overflow: hidden;
+  }
+
+  /* ── NAV DOTS ── */
+  .nav {
+    position: fixed;
+    right: 28px;
+    top: 50%;
+    transform: translateY(-50%);
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    z-index: 100;
+  }
+  .nav-dot {
+    width: 8px; height: 8px;
+    border-radius: 50%;
+    background: rgba(12,31,61,0.18);
+    cursor: pointer;
+    border: none;
+    padding: 0;
+    transition: all 0.2s;
+  }
+  .nav-dot.active { background: var(--gold); transform: scale(1.4); }
+  .nav-dot:hover  { background: var(--navy-mid); }
+
+  /* ── SLIDE 1: COVER ── */
+  .slide-cover {
+    background: var(--navy);
+    color: white;
+    justify-content: space-between;
+    padding-top: 100px;
+    padding-bottom: 80px;
+  }
+  .slide-cover::before {
+    content: '';
+    position: absolute;
+    top: -140px; right: -140px;
+    width: 560px; height: 560px;
+    border-radius: 50%;
+    border: 1px solid rgba(184,151,42,0.12);
+    pointer-events: none;
+  }
+  .slide-cover::after {
+    content: '';
+    position: absolute;
+    top: -70px; right: -70px;
+    width: 320px; height: 320px;
+    border-radius: 50%;
+    border: 1px solid rgba(184,151,42,0.22);
+    pointer-events: none;
+  }
+  .cover-eyebrow {
+    font-size: 11px; font-weight: 500;
+    letter-spacing: 0.2em; text-transform: uppercase;
+    color: var(--gold); margin-bottom: 32px;
+  }
+  .cover-name {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(52px, 7vw, 86px);
+    font-weight: 700; line-height: 1.0;
+    color: white; margin-bottom: 28px;
+  }
+  .cover-name em { font-style: italic; color: var(--gold-light); }
+  .cover-tagline {
+    font-size: 18px; font-weight: 300;
+    color: rgba(255,255,255,0.68);
+    max-width: 540px; line-height: 1.65;
+    margin-bottom: 48px;
+  }
+  .cover-role-line {
+    display: inline-block;
+    font-size: 13px; font-weight: 500;
+    color: var(--gold-light);
+    border: 1px solid rgba(184,151,42,0.35);
+    border-radius: 100px;
+    padding: 7px 20px;
+    margin-bottom: 72px;
+    letter-spacing: 0.05em;
+  }
+  .cover-contact {
+    font-size: 13px; color: rgba(255,255,255,0.38);
+    display: flex; gap: 24px; flex-wrap: wrap;
+    border-top: 1px solid rgba(255,255,255,0.1);
+    padding-top: 28px;
+  }
+  .cover-contact a { color: rgba(255,255,255,0.38); text-decoration: none; }
+
+  /* ── SLIDE LABEL ── */
+  .slide-label {
+    font-size: 10px; font-weight: 500;
+    letter-spacing: 0.22em; text-transform: uppercase;
+    color: var(--gold); margin-bottom: 20px;
+  }
+
+  /* ── SLIDE 2: PHILOSOPHY ── */
+  .slide-philosophy { background: var(--white); }
+  .bg-number {
+    font-family: 'Playfair Display', serif;
+    font-size: 160px; font-weight: 700;
+    color: rgba(12,31,61,0.04);
+    position: absolute; top: 16px; right: 8%;
+    line-height: 1; pointer-events: none; user-select: none;
+  }
+  .phil-headline {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(36px, 4.5vw, 56px);
+    font-weight: 700; line-height: 1.15;
+    color: var(--navy); max-width: 680px;
+    margin-bottom: 36px;
+  }
+  .phil-headline em { font-style: italic; color: #2563A8; }
+  .phil-body {
+    font-size: 17px; font-weight: 300;
+    line-height: 1.78; color: var(--text-mid);
+    max-width: 600px; margin-bottom: 48px;
+  }
+  .principles {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 14px; max-width: 640px;
+  }
+  .principle {
+    display: flex; align-items: flex-start;
+    gap: 14px; padding: 18px 20px;
+    background: var(--cream); border-radius: 10px;
+    border-left: 3px solid var(--gold);
+  }
+  .principle-text {
+    font-size: 14px; font-weight: 500;
+    color: var(--navy); line-height: 1.45;
+  }
+
+  /* ── SLIDE 3: STORIES ── */
+  .slide-stories { background: var(--cream); }
+  .stories-intro {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(30px, 3.8vw, 48px);
+    font-weight: 700; line-height: 1.2;
+    color: var(--navy); max-width: 600px;
+    margin-bottom: 48px;
+  }
+  .stories-intro em { font-style: italic; color: #2563A8; }
+  .stories-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 18px; width: 100%;
+  }
+  .story-card {
+    background: var(--white); border-radius: 14px;
+    padding: 28px 22px;
+    border: 1px solid var(--rule);
+    position: relative; overflow: hidden;
+  }
+  .story-card::before {
+    content: '';
+    position: absolute; top: 0; left: 0; right: 0;
+    height: 3px; background: var(--gold);
+  }
+  .story-featured::before { background: var(--navy); height: 4px; }
+  .story-featured { border-color: rgba(12,31,61,0.15); }
+  .story-badge {
+    display: inline-block;
+    font-size: 9px; font-weight: 500;
+    letter-spacing: 0.14em; text-transform: uppercase;
+    background: var(--gold-pale); color: var(--gold);
+    border-radius: 100px; padding: 3px 10px;
+    margin-bottom: 12px;
+  }
+  .story-co {
+    font-size: 10px; font-weight: 500;
+    letter-spacing: 0.16em; text-transform: uppercase;
+    color: var(--text-muted); margin-bottom: 10px;
+  }
+  .story-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 20px; font-weight: 700;
+    color: var(--navy); line-height: 1.25;
+    margin-bottom: 12px;
+  }
+  .story-body {
+    font-size: 13.5px; font-weight: 300;
+    color: var(--text-mid); line-height: 1.72;
+    margin-bottom: 18px;
+  }
+  .story-lesson {
+    font-size: 12px; font-weight: 500;
+    color: #2563A8; font-style: italic;
+    padding-top: 14px; border-top: 1px solid var(--rule);
+    line-height: 1.5;
+  }
+
+  /* ── SLIDE 4: METRICS ── */
+  .slide-metrics { background: var(--navy); color: white; }
+  .slide-metrics .slide-label { color: var(--gold); }
+  .metrics-headline {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(30px, 3.8vw, 48px);
+    font-weight: 700; color: white;
+    max-width: 560px; line-height: 1.2;
+    margin-bottom: 48px;
+  }
+  .metrics-headline em { font-style: italic; color: var(--gold-light); }
+
+  .metrics-top {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 14px; margin-bottom: 40px;
+  }
+  .metric-card {
+    background: rgba(255,255,255,0.05);
+    border: 1px solid rgba(255,255,255,0.09);
+    border-radius: 12px; padding: 22px 18px;
+    position: relative;
+  }
+  .metric-card::after {
+    content: ''; position: absolute;
+    bottom: 0; left: 18px; right: 18px;
+    height: 2px; background: var(--gold);
+    opacity: 0.45; border-radius: 0 0 2px 2px;
+  }
+  .metric-num {
+    font-family: 'Playfair Display', serif;
+    font-size: 34px; font-weight: 700;
+    color: var(--gold-light); line-height: 1;
+    margin-bottom: 8px;
+  }
+  .metric-label {
+    font-size: 12px; font-weight: 300;
+    color: rgba(255,255,255,0.5); line-height: 1.45;
+  }
+
+  .bar-section { width: 100%; }
+  .bar-row {
+    display: flex; align-items: center;
+    gap: 16px; margin-bottom: 13px;
+  }
+  .bar-label {
+    font-size: 12px; color: rgba(255,255,255,0.45);
+    width: 180px; flex-shrink: 0;
+  }
+  .bar-track {
+    flex: 1; height: 4px;
+    background: rgba(255,255,255,0.07);
+    border-radius: 4px; overflow: hidden;
+  }
+  .bar-fill {
+    height: 100%; background: var(--gold);
+    border-radius: 4px; opacity: 0.65;
+  }
+  .bar-val {
+    font-size: 13px; font-weight: 500;
+    color: var(--gold-light);
+    width: 140px; text-align: right; flex-shrink: 0;
+  }
+
+  /* ── SLIDE 5: WHAT I BRING ── */
+  .slide-bring { background: var(--white); }
+  .bring-headline {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(30px, 3.8vw, 48px);
+    font-weight: 700; color: var(--navy);
+    max-width: 580px; line-height: 1.2;
+    margin-bottom: 44px;
+  }
+  .bring-headline em { font-style: italic; color: #2563A8; }
+  .bring-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 36px; max-width: 880px;
+    margin-bottom: 48px;
+  }
+  .bring-col-title {
+    font-size: 10px; font-weight: 500;
+    letter-spacing: 0.18em; text-transform: uppercase;
+    color: var(--gold); margin-bottom: 20px;
+  }
+  .bring-item {
+    display: flex; align-items: flex-start;
+    gap: 12px; margin-bottom: 16px;
+  }
+  .bring-dot {
+    width: 6px; height: 6px; border-radius: 50%;
+    background: var(--gold); flex-shrink: 0;
+    margin-top: 8px;
+  }
+  .bring-text {
+    font-size: 15px; font-weight: 300;
+    color: var(--text-mid); line-height: 1.55;
+  }
+  .bring-text strong { font-weight: 500; color: var(--navy); }
+
+  .closing-block {
+    border-top: 1px solid var(--rule);
+    padding-top: 32px; max-width: 640px;
+  }
+  .closing-quote {
+    font-family: 'Playfair Display', serif;
+    font-size: 22px; font-style: italic;
+    color: var(--navy); line-height: 1.55;
+    margin-bottom: 22px;
+  }
+  .closing-contact {
+    display: flex; gap: 28px; flex-wrap: wrap;
+  }
+  .closing-contact a {
+    font-size: 13px; font-weight: 500;
+    color: #2563A8; text-decoration: none;
+  }
+  .closing-contact a:hover { color: var(--navy); }
+
+  /* ── PRINT ── */
+  @media print {
+    .nav { display: none; }
+    .slide { min-height: 100vh; page-break-after: always; }
+  }
+</style>
+</head>
+<body>
+
+<nav class="nav" aria-label="Slide navigation">
+  <button class="nav-dot active" onclick="goTo(0)" aria-label="Slide 1"></button>
+  <button class="nav-dot" onclick="goTo(1)" aria-label="Slide 2"></button>
+  <button class="nav-dot" onclick="goTo(2)" aria-label="Slide 3"></button>
+  <button class="nav-dot" onclick="goTo(3)" aria-label="Slide 4"></button>
+  <button class="nav-dot" onclick="goTo(4)" aria-label="Slide 5"></button>
+</nav>
+
+<!-- SLIDE 1: COVER -->
+<section class="slide slide-cover" id="slide-0">
+  <div>
+    <p class="cover-eyebrow">Sr. Manager, Field Events Management &nbsp;·&nbsp; Northwestern Mutual</p>
+    <h1 class="cover-name">Erin<br><em>Gonzalez</em></h1>
+    <p class="cover-tagline">Event management leader with 10+ years building teams, designing experiences, and delivering programs that bring a brand's highest promise to life — one attendee at a time.</p>
+    <div class="cover-role-line">End-to-End Event Management &nbsp;·&nbsp; Team Leadership &nbsp;·&nbsp; Brand & Hospitality Excellence</div>
+  </div>
+  <div class="cover-contact">
+    <span>Milwaukee, WI</span>
+    <span>414-379-5966</span>
+    <a href="mailto:bichanich@uwalumni.com">bichanich@uwalumni.com</a>
+    <a href="https://linkedin.com/in/erin-gonzalez" target="_blank">linkedin.com/in/erin-gonzalez</a>
+  </div>
+</section>
+
+<!-- SLIDE 2: PHILOSOPHY -->
+<section class="slide slide-philosophy" id="slide-1">
+  <div class="bg-number" aria-hidden="true">01</div>
+  <p class="slide-label">Philosophy</p>
+  <h2 class="phil-headline">Anticipate the need<br>before it's<br><em>voiced.</em></h2>
+  <p class="phil-body">I was trained early in my career to believe that the highest form of hospitality isn't responding to what someone asks — it's knowing what they need before they ask. That belief has shaped every event I've ever run, every team I've ever led, and every vendor relationship I've ever built. It's the standard I hold myself to, the standard I coach my teams to, and the standard Northwestern Mutual's events deserve.</p>
+  <div class="principles">
+    <div class="principle">
+      <div class="principle-text">Every attendee deserves to feel like the most important person in the room — because in that moment, they are.</div>
+    </div>
+    <div class="principle">
+      <div class="principle-text">Operational excellence is the floor. Memorable experience is the ceiling. Never confuse the two.</div>
+    </div>
+    <div class="principle">
+      <div class="principle-text">A great team doesn't just execute — they understand why the event matters and carry that into every decision.</div>
+    </div>
+    <div class="principle">
+      <div class="principle-text">The brand lives or dies in the moment of human contact. Protect it like it's personal — because it is.</div>
+    </div>
+  </div>
+</section>
+
+<!-- SLIDE 3: STORIES -->
+<section class="slide slide-stories" id="slide-2">
+  <p class="slide-label">The Work In Practice</p>
+  <h2 class="stories-intro">Three moments that show<br>the standard I <em>hold.</em></h2>
+  <div class="stories-grid">
+
+    <div class="story-card story-featured">
+      <div class="story-badge">⭐ Most Relevant to NM</div>
+      <p class="story-co">Live Nation</p>
+      <h3 class="story-title">The Unplanned Premium Setup</h3>
+      <p class="story-body">A guest arrived in a wheelchair — unannounced, not my client, not flagged in advance. Before anyone asked me to do anything, I had already moved: table, tablecloth, lighting, menus, dedicated wait staff, front-of-stage placement. A premium accessible experience, built in real time, for someone who had no reason to expect it.</p>
+      <p class="story-lesson">"Nobody assigned that to me. I did it because that's what the brand standard required — whether anyone was watching or not."</p>
+    </div>
+
+    <div class="story-card">
+      <p class="story-co">Live Nation</p>
+      <h3 class="story-title">The Kid Who Couldn't Stay Up</h3>
+      <p class="story-body">A premium member's son couldn't attend his favorite artist's concert — school night, show started too late. I mobilized my GM, talent booker, marketing, and operations to arrange a private meet-and-greet before the show. Lanyard, autographs, merch, his favorite artist — just for him. He never heard a single song. He didn't need to.</p>
+      <p class="story-lesson">"That's a core memory. That family has been loyal ever since. Events done right aren't forgotten — they're told as stories for years."</p>
+    </div>
+
+    <div class="story-card">
+      <p class="story-co">State National · Markel</p>
+      <h3 class="story-title">The Baseball Box</h3>
+      <p class="story-body">Inherited a completely dark at-risk account. Key decision maker not responding to anything. I researched him, learned he loved baseball. My dad owned a sports store. I built a box of vintage memorabilia from his favorite team, sent it with a handwritten note. He called within the week. The account made it into the RFP.</p>
+      <p class="story-lesson">"Individualization isn't a tactic — it's a philosophy. I bring it to every relationship I manage, internal or external."</p>
+    </div>
+
+  </div>
+</section>
+
+<!-- SLIDE 4: METRICS -->
+<section class="slide slide-metrics" id="slide-3">
+  <p class="slide-label">The Numbers</p>
+  <h2 class="metrics-headline">The philosophy<br>has <em>receipts.</em></h2>
+  <div class="metrics-top">
+    <div class="metric-card">
+      <div class="metric-num">150+</div>
+      <div class="metric-label">Direct reports led with full HR authority at U.S. Bank Stadium</div>
+    </div>
+    <div class="metric-card">
+      <div class="metric-num">350+</div>
+      <div class="metric-label">Events managed annually across peak roles — NFL, live entertainment, corporate</div>
+    </div>
+    <div class="metric-card">
+      <div class="metric-num">$500K</div>
+      <div class="metric-label">Annual event budget managed across dual Live Nation venues</div>
+    </div>
+    <div class="metric-card">
+      <div class="metric-num">200+</div>
+      <div class="metric-label">Corporate clients managed simultaneously at NFL venue level</div>
+    </div>
+  </div>
+  <div class="bar-section">
+    <div class="bar-row">
+      <span class="bar-label">Team Leadership Scale</span>
+      <div class="bar-track"><div class="bar-fill" style="width:100%"></div></div>
+      <span class="bar-val">150+ direct reports</span>
+    </div>
+    <div class="bar-row">
+      <span class="bar-label">Annual Event Volume</span>
+      <div class="bar-track"><div class="bar-fill" style="width:95%"></div></div>
+      <span class="bar-val">350+ events/year</span>
+    </div>
+    <div class="bar-row">
+      <span class="bar-label">Corporate Client Portfolio</span>
+      <div class="bar-track"><div class="bar-fill" style="width:88%"></div></div>
+      <span class="bar-val">200+ accounts</span>
+    </div>
+    <div class="bar-row">
+      <span class="bar-label">Budget Managed</span>
+      <div class="bar-track"><div class="bar-fill" style="width:70%"></div></div>
+      <span class="bar-val">$500K annually</span>
+    </div>
+    <div class="bar-row">
+      <span class="bar-label">Partner Reach (MOA)</span>
+      <div class="bar-track"><div class="bar-fill" style="width:82%"></div></div>
+      <span class="bar-val">40M+ annual visitors</span>
+    </div>
+  </div>
+</section>
+
+<!-- SLIDE 5: WHAT I BRING TO NM -->
+<section class="slide slide-bring" id="slide-4">
+  <p class="slide-label">What I Bring to Northwestern Mutual</p>
+  <h2 class="bring-headline">Built for this role.<br><em>Ready for this team.</em></h2>
+  <div class="bring-grid">
+    <div>
+      <p class="bring-col-title">Event Leadership Capabilities</p>
+      <div class="bring-item"><div class="bring-dot"></div><div class="bring-text"><strong>End-to-end event management</strong> — from strategy and RFP through on-site execution and post-event reporting</div></div>
+      <div class="bring-item"><div class="bring-dot"></div><div class="bring-text"><strong>Player-coach team leadership</strong> — I execute alongside my team and develop them at the same time</div></div>
+      <div class="bring-item"><div class="bring-dot"></div><div class="bring-text"><strong>Vendor ecosystem management</strong> — master service agreements, RFPs, hotel contracts, and high-standard vendor accountability</div></div>
+      <div class="bring-item"><div class="bring-dot"></div><div class="bring-text"><strong>Budget governance & forecasting</strong> — strategic resource allocation within compliance and governance frameworks</div></div>
+      <div class="bring-item"><div class="bring-dot"></div><div class="bring-text"><strong>Tech fluency</strong> — Cvent, Tripleseat, SevenRooms, Eventbrite, OpenTable, Microsoft Suite</div></div>
+    </div>
+    <div>
+      <p class="bring-col-title">What Makes Me Different</p>
+      <div class="bring-item"><div class="bring-dot"></div><div class="bring-text"><strong>A post-COVID toolkit most event leaders don't have</strong> — 3 years in enterprise SaaS sharpened stakeholder management, data-driven decision making, and executive communication</div></div>
+      <div class="bring-item"><div class="bring-dot"></div><div class="bring-text"><strong>Premium hospitality as a non-negotiable standard</strong> — not a nice-to-have, the operating system I run on</div></div>
+      <div class="bring-item"><div class="bring-dot"></div><div class="bring-text"><strong>Deep talent development instinct</strong> — I build teams that outlast my direct involvement</div></div>
+      <div class="bring-item"><div class="bring-dot"></div><div class="bring-text"><strong>Local presence, national experience</strong> — Milwaukee-based, with event execution across multiple states and partner ecosystems spanning major market brands</div></div>
+    </div>
+  </div>
+  <div class="closing-block">
+    <p class="closing-quote">"I lead events the way Northwestern Mutual serves clients —<br>with precision, warmth, and an obsessive commitment<br>to the human on the other end.<br>That's what you get with me."</p>
+    <div class="closing-contact">
+      <a href="mailto:bichanich@uwalumni.com">&#9993; bichanich@uwalumni.com</a>
+      <a href="tel:4143795966">&#9742; 414-379-5966</a>
+      <a href="https://linkedin.com/in/erin-gonzalez" target="_blank">&#8599; LinkedIn Profile</a>
+    </div>
+  </div>
+</section>
+
+<script>
+  const slides = document.querySelectorAll('.slide');
+  const dots   = document.querySelectorAll('.nav-dot');
+
+  function goTo(i) { slides[i].scrollIntoView({ behavior: 'smooth' }); }
+
+  const observer = new IntersectionObserver(entries => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        const i = Array.from(slides).indexOf(entry.target);
+        dots.forEach((d, j) => d.classList.toggle('active', i === j));
+      }
+    });
+  }, { threshold: 0.5 });
+
+  slides.forEach(s => observer.observe(s));
+</script>
+</body>
+</html>
